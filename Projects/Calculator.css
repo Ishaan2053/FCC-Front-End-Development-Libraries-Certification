@@ -3,6 +3,7 @@
     margin: 5px;
     margin-top: 0px;
     border-radius: 25px;
+    transition: all 0.3 ease-in-out;
 }
 
 .navbar-dark .navbar-nav .nav-link:hover {
@@ -11,6 +12,7 @@
 }
 
 .btn{
+    color: rgb(246, 185, 205);
 width: 50px;
 height: 50px;
 font-size: 25px;
@@ -34,7 +36,7 @@ background-color: rgb(123, 123, 123);
 #footer {
     background: #2b2d31;
       text-align: center;
-      color: #d3ffff;
+      color: rgb(246, 185, 205);
       position: relative;
       bottom: 0;
       min-height: 13vh;
@@ -48,7 +50,6 @@ background-color: rgb(123, 123, 123);
   }
   
   #footer p:hover {
-      color: rgb(127, 211, 249);
       cursor: default;
   }
   
@@ -59,9 +60,9 @@ background-color: rgb(123, 123, 123);
   }
   
   .footer-icons:hover {
-      color: rgb(61, 255, 129);
+      color: rgb(246, 185, 205);
   }
   
   #footer sub {
-      color:rgb(45, 194, 97);
+      color:rgb(246, 185, 205);
   }
