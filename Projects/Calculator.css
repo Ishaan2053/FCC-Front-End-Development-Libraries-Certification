@@ -1,38 +1,23 @@
-/* Create the Outer layout of the Calculator. */
-.formstyle
-{
-width: 30vw;
-height: 50vh;
-margin: 20px auto;
-border: 3px solid skyblue;
-border-radius: 5px;
-padding: 20px;
-text-align: center;
-background-color: grey;
+.navbar-dark .navbar-nav .nav-link {
+    color: rgb(246, 119, 161);
+    margin: 5px;
+    margin-top: 0px;
+    border-radius: 25px;
 }
 
-
-input:hover
-{
-background-color: rgb(123, 123, 123);
-}
-	
-*{
-margin: 0;
-padding: 0;
+.navbar-dark .navbar-nav .nav-link:hover {
+    color: rgb(246, 185, 205);
+    box-shadow:0 0 5px rgb(246, 119, 161);
 }
 
-/* It is used to create the layout for calculator button. */
 .btn{
 width: 50px;
 height: 50px;
 font-size: 25px;
-margin: 2px;
+margin: 0.5vw 0.5vh;
 cursor: pointer;
-
 }
 
-/* It is used to display the numbers, operations and results. */
 .textview{
 width: 223px;
 margin: 5px;
@@ -40,3 +25,43 @@ font-size: 25px;
 padding: 5px;
 background-color: rgb(97, 97, 97);
 }	
+
+input:hover
+{
+background-color: rgb(123, 123, 123);
+}
+
+#footer {
+    background: #2b2d31;
+      text-align: center;
+      color: #d3ffff;
+      position: relative;
+      bottom: 0;
+      min-height: 13vh;
+      width: 100%;
+  }
+  
+  #footer p {
+      margin-bottom: 0;
+      display: inline;
+      transition: all 0.3s ease-in-out;
+  }
+  
+  #footer p:hover {
+      color: rgb(127, 211, 249);
+      cursor: default;
+  }
+  
+  .footer-icons {
+      color: rgb(255, 255, 255);
+      margin: 0.45rem;
+      transition: all 0.3s ease-out;
+  }
+  
+  .footer-icons:hover {
+      color: rgb(61, 255, 129);
+  }
+  
+  #footer sub {
+      color:rgb(45, 194, 97);
+  }
