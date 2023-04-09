@@ -10,34 +10,35 @@ let workDurationInput = document.querySelector('#input-work-duration')
 let breakDurationInput = document.querySelector('#input-break-duration')
 workDurationInput.value = '25'
 breakDurationInput.value = '5'
+let isClockStopped = true
 
 // START
 startButton.addEventListener('click', () => {
-  toggleClock();
+    toggleClock();
 })
 
 // PAUSE
 pauseButton.addEventListener('click', () => {
-  toggleClock();
+    toggleClock();
 })
 
 // STOP
 stopButton.addEventListener('click', () => {
-  toggleClock(true);
+    toggleClock(true);
 })
 
 // UPDATE WORK TIME
 workDurationInput.addEventListener('input', () => {
     updatedWorkSessionDuration = minuteToSeconds(workDurationInput.value)
-  })
-  // UPDATE PAUSE TIME
-  breakDurationInput.addEventListener('input', () => {
+})
+// UPDATE PAUSE TIME
+breakDurationInput.addEventListener('input', () => {
     updatedBreakSessionDuration = minuteToSeconds(breakDurationInput.value)
-  })
+})
 
-  const minuteToSeconds = (mins) => {
+const minuteToSeconds = (mins) => {
     return mins * 60
-  }
+}
 
 let isClockRunning = false;
 
@@ -50,27 +51,32 @@ let breakSessionDuration = 300;
 
 const toggleClock = (reset) => {
     if (reset) {
-      // STOP THE TIMER
+        stopClock()
     } else {
-      if (isClockRunning === true) {
-        // PAUSE THE TIMER
-        clearInterval(clockTimer);
-        isClockRunning = false;
-      } else {
-        // START THE TIMER
-        isClockRunning = true;
-
-        clockTimer = setInterval(() => {
-            // decrease time left / increase time spent
-            stepDown()
-        }, 1000)
-        
-      }
+        // new
+        if (isClockStopped) {
+            setUpdatedTimers()
+            isClockStopped = false
+        }
+        if (isClockRunning === true) {
+            // pause
+            clearInterval(clockTimer)
+            // update icon to the play one
+            // set the vale of the button to start or pause
+            isClockRunning = false
+        } else {
+            // start
+            clockTimer = setInterval(() => {
+                stepDown()
+                displayCurrentTimeLeftInSession()
+            }, 1000)
+            isClockRunning = true
+        }
     }
-  }
+}
 
 
-  const displayCurrentTimeLeftInSession = () => {
+const displayCurrentTimeLeftInSession = () => {
     const secondsLeft = currentTimeLeftInSession
     let result = ''
     const seconds = secondsLeft % 60
@@ -78,16 +84,16 @@ const toggleClock = (reset) => {
     let hours = parseInt(secondsLeft / 3600)
     // add leading zeroes if it's less than 10
     function addLeadingZeroes(time) {
-      return time < 10 ? `0${time}` : time
+        return time < 10 ? `0${time}` : time
     }
     if (hours > 0) result += `${hours}:`
     result += `${addLeadingZeroes(minutes)}:${addLeadingZeroes(seconds)}`
     pomodoroTimer.innerText = result.toString()
-  }
+}
 
-  pomodoroTimer.innerText = result
+pomodoroTimer.innerText = result
 
-  const stopClock = () => {
+const stopClock = () => {
     // new
     displaySessionLog(type)
     clearInterval(clockTimer)
@@ -96,53 +102,66 @@ const toggleClock = (reset) => {
     displayCurrentTimeLeftInSession()
     // new
     type = 'Work'
-  }
+}
 
-  const stepDown = () => {
+const stepDown = () => {
     if (currentTimeLeftInSession > 0) {
-      // decrease time left / increase time spent
-      currentTimeLeftInSession--
-      timeSpentInCurrentSession++
+        // decrease time left / increase time spent
+        currentTimeLeftInSession--
+        timeSpentInCurrentSession++
     } else if (currentTimeLeftInSession === 0) {
         timeSpentInCurrentSession = 0;
         // Timer is over -> if work switch to break, viceversa
         if (type === 'Work') {
-          currentTimeLeftInSession = breakSessionDuration;
-          displaySessionLog('Work');
-          type = 'Break';
-          // new
-          currentTaskLabel.value = 'Break';
-          currentTaskLabel.disabled = true;
+            currentTimeLeftInSession = breakSessionDuration;
+            displaySessionLog('Work');
+            type = 'Break';
+            // new
+            currentTaskLabel.value = 'Break';
+            currentTaskLabel.disabled = true;
         } else {
-          currentTimeLeftInSession = workSessionDuration;
-          type = 'Work';
-          // new
-          if (currentTaskLabel.value === 'Break') {
-            currentTaskLabel.value = workSessionLabel;
-          }
-          currentTaskLabel.disabled = false;
-          displaySessionLog('Break');
+            currentTimeLeftInSession = workSessionDuration;
+            type = 'Work';
+            // new
+            if (currentTaskLabel.value === 'Break') {
+                currentTaskLabel.value = workSessionLabel;
+            }
+            currentTaskLabel.disabled = false;
+            displaySessionLog('Break');
         }
-      }
+    }
     displayCurrentTimeLeftInSession()
-  }
+}
 
-  let timeSpentInCurrentSession = 0
+let timeSpentInCurrentSession = 0
 
-  const displaySessionLog = (type) => {
+const displaySessionLog = (type) => {
     const sessionsList = document.querySelector('#pomodoro-sessions')
     // append li to it
     const li = document.createElement('li')
     if (type === 'Work') {
         sessionLabel = currentTaskLabel.value ? currentTaskLabel.value : 'Work'
         workSessionLabel = sessionLabel
-      } else {
+    } else {
         sessionLabel = 'Break'
-      }
+    }
     let elapsedTime = parseInt(timeSpentInCurrentSession / 60)
     elapsedTime = elapsedTime > 0 ? elapsedTime : '< 1'
     const text = document.createTextNode(`${sessionLabel} : ${elapsedTime} min`)
     li.appendChild(text)
     sessionsList.appendChild(li)
-  }
+}
 
+const setUpdatedTimers = () => {
+    if (type === 'Work') {
+        currentTimeLeftInSession = updatedWorkSessionDuration
+            ? updatedWorkSessionDuration
+            : workSessionDuration
+        workSessionDuration = currentTimeLeftInSession
+    } else {
+        currentTimeLeftInSession = updatedBreakSessionDuration
+            ? updatedBreakSessionDuration
+            : breakSessionDuration
+        breakSessionDuration = currentTimeLeftInSession
+    }
+}
