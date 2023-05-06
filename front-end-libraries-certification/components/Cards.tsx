@@ -32,20 +32,18 @@ function Cards({}: Props) {
             </p>
           </a>
 
-          <a
+          <Link
             className="block rounded-xl border border-gray-800 p-8 shadow-xl transition hover:border-yellow-500/10 hover:shadow-yellow-800/10"
-            href="/services/digital-campaigns"
+            href="/calculator"
           >
             <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="#f8e71c" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="arcs"><line x1="19" y1="5" x2="5" y2="19"></line><circle cx="6.5" cy="6.5" r="2.5"></circle><circle cx="17.5" cy="17.5" r="2.5"></circle></svg>
 
             <h2 className="mt-4 text-xl font-bold text-white">Calculator</h2>
 
             <p className="mt-1 text-sm text-gray-300">
-              Lorem ipsum dolor sit amet consectetur adipisicing elit. Ex ut quo
-              possimus adipisci distinctio alias voluptatum blanditiis
-              laudantium.
+              A simple calculator that can perform all basic arithmatic operations, with a simple, minimal interface. 
             </p>
-          </a>
+          </Link>
 
           <a
             className="block rounded-xl border border-gray-800 p-8 shadow-xl transition hover:border-pink-500/10 hover:shadow-yellow-800/10"
