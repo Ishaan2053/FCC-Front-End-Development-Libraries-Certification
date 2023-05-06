@@ -7,12 +7,12 @@ function Footer({}: Props) {
   return (
     <div>
         <footer aria-label="Site Footer" className="bg-white dark:bg-gray-900 bottom-0">
-    <div className="w-screen px-4 pb-8 mx-auto sm:px-6 lg:px-8">
+    <div className="max-w-screen px-4 pb-8 mx-auto sm:px-6 lg:px-8">
       <div
-        className="pt-8 mt-0 border-t border-gray-100 dark:border-gray-800 sm:flex sm:items-center sm:justify-between lg:mt-0"
+        className="pt-8 border-t border-gray-100 dark:border-gray-800 sm:flex sm:items-center sm:justify-between"
       >
         <nav aria-label="Footer Navigation - Support">
-          <ul className="flex flex-wrap justify-center gap-4 text-xs lg:justify-end">
+          <ul className="flex flex-wrap justify-center gap-4 text-sm lg:justify-end">
             <li>
               <Link
                 href="#"
@@ -23,21 +23,21 @@ function Footer({}: Props) {
             </li>
   
             <li>
-              <a
+              <Link
                 href="#"
                 className="text-gray-500 transition hover:opacity-75 dark:text-gray-400"
               >
                 Portfolio
-              </a>
+              </Link>
             </li>
   
             <li>
-              <a
+              <Link
                 href="#"
                 className="text-gray-500 transition hover:opacity-75 dark:text-gray-400"
               >
                 Blogs
-              </a>
+              </Link>
             </li>
           </ul>
         </nav>
@@ -48,11 +48,11 @@ function Footer({}: Props) {
           
   
           <li>
-            <a
-              href="/"
+            <Link
+              href="www.twitter.com/Ishaan2053"
               rel="noreferrer"
               target="_blank"
-              className="text-gray-700 transition hover:opacity-75 dark:text-gray-200"
+              className="text-white transition hover:opacity-75 dark:text-yellow-300"
             >
               <span className="sr-only">Twitter</span>
   
@@ -66,7 +66,7 @@ function Footer({}: Props) {
                   d="M8.29 20.251c7.547 0 11.675-6.253 11.675-11.675 0-.178 0-.355-.012-.53A8.348 8.348 0 0022 5.92a8.19 8.19 0 01-2.357.646 4.118 4.118 0 001.804-2.27 8.224 8.224 0 01-2.605.996 4.107 4.107 0 00-6.993 3.743 11.65 11.65 0 01-8.457-4.287 4.106 4.106 0 001.27 5.477A4.072 4.072 0 012.8 9.713v.052a4.105 4.105 0 003.292 4.022 4.095 4.095 0 01-1.853.07 4.108 4.108 0 003.834 2.85A8.233 8.233 0 012 18.407a11.616 11.616 0 006.29 1.84"
                 />
               </svg>
-            </a>
+            </Link>
           </li>
   
           <li>
@@ -74,7 +74,7 @@ function Footer({}: Props) {
               href="/"
               rel="noreferrer"
               target="_blank"
-              className="text-gray-700 transition hover:opacity-75 dark:text-purple-200"
+              className="text-gray-700 transition hover:opacity-75 dark:text-yellow-300"
             >
               <span className="sr-only">GitHub</span>
   
@@ -108,6 +108,7 @@ function Footer({}: Props) {
         </ul>
       </div>
     </div>
+ 
   </footer>
   </div>
   )
