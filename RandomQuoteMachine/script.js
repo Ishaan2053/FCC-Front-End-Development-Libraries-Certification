@@ -1,4 +1,3 @@
-// Array of prepared quotes found on the internet.
 const quotes = [
   {
     quote: "Life isn’t about getting and having, it’s about giving and being.",
@@ -78,18 +77,17 @@ const quotes = [
   }
 ];
 
-// Load JavaScript before HTML.
 window.onload = initialize;
 function initialize() {
   generateQuote();
 }
 
-// Generate random quote.
+// Generation function.
 function generateQuote() {
   let randomNumber = Math.floor(Math.random() * quotes.length);
   let randomQuote = quotes[randomNumber];
 
-  // Generic twitter link.
+
   let twitterLink =
     "https://twitter.com/intent/tweet?hashtags=quotes&related=freecodecamp&text=";
 
@@ -97,9 +95,9 @@ function generateQuote() {
     '"' + randomQuote.quote.replaceAll(" ", "%20") + '"';
   let authorFormatted = randomQuote.author.replaceAll(" ", "%20");
 
-  // Add formatted quote.
+
   twitterLink += quoteFormatted;
-  // Add formatted author.
+
   twitterLink += " - " + authorFormatted;
 
   document.getElementById("text").innerText = '“' + randomQuote.quote + '”';
