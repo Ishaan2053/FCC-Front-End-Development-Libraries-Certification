@@ -7,9 +7,9 @@
   <title>Random Quote Machine</title>
 </head>
 
-<body class="bg-gray-900 mx-auto my-auto">
+<body class="bg-gray-900 mx-auto overflow-x-hidden h-screen">
   <header aria-label="Page Header">
-    <div class="mx-auto max-w-screen-xl px-4 py-8 sm:px-6 sm:py-12 lg:px-8">
+    <div class="bg-gray-800 rounded-lg mx-auto max-w-screen-xl px-4 py-8 sm:px-6 sm:py-12 lg:px-8 shadow-lg">
       <div class="sm:flex sm:items-center sm:justify-between">
         <div class="text-center sm:text-left">
           <h1
@@ -38,8 +38,8 @@
     </div>
   </header>
 
-  <div class="mx-auto max-w-screen-xl px-5 py-12 sm:px-6 lg:px-8">
-    <div class="mx-auto my-5 max-w-lg shadow-2xl border px-5 py-5 pb-12 pt-10 transition hover:border-emerald-300">
+  <div class="mx-auto max-w-screen-xl px-5 py-5 sm:px-6 lg:px-8">
+    <div class="mx-auto my-5 max-w-lg shadow-2xl border px-5 pb-1 pt-1 transition hover:border-emerald-300">
 
       <wrapper class="relative flex flex-col w-full space-y-5 rounded-lg p-4 sm:p-6 lg:p-8 items-center justify-center" id="quote-box">
 
@@ -55,10 +55,12 @@
           </button>
         </div>
 
-        <div class="bg-transparent border rounded-2xl m-auto w-full h-full px-3 py-3 transition hover:border-emerald-300">
+        <div class="bg-transparent border rounded-2xl shadow-2xl m-auto w-full h-full px-3 py-3 transition hover:border-emerald-300">
           <div class="text-gray-200" id="text"></div>
-          <div class="text-gray-200 font-bold" id="author" class="text-center font-italic"></div>
+          <div class="text-emerald-300 font-bold" id="author"></div>
         </div>
+
+
         <a class="inline-flex mx-10 items-center justify-center gap-2 rounded-lg border-2 border-[#55acee] bg-[#55acee] px-5 py-3 text-sm font-medium text-white transition-colors hover:bg-transparent hover:text-[#55acee] focus:outline-none focus:ring active:opacity-75"
           id="tweet-quote" href="https:/twitter.com" target="_blank" rel="noreferrer">
           Tweet This Quote
@@ -74,13 +76,13 @@
   </div>
 
 
-<footer aria-label="Site Footer" class="bg-gray-800 bottom-0">
+<footer aria-label="Site Footer" class="bg-gray-800 fixed bottom-0 left-0 w-full">
   <div class="mx-auto max-w-screen-xl px-4 py-8 sm:px-6 lg:px-8">
     <div class="text-gray-200 sm:flex sm:items-center sm:justify-between">
      
     </div>
         <ul class="col-span-2 flex justify-start gap-6 lg:col-span-5 lg:justify-end text-gray-200">
-          <p>follow me here</p>
+          <p class="text-gray-300">follow me here:</p>
           <li>
             <a
               href="https://twitter.com/Ishaan2053"
