@@ -60,14 +60,6 @@ export default function Calculator() {
               <li className="nav-item">
                 <a className="nav-link" href="#">Link</a>
               </li>
-              <li className="nav-item dropdown">
-                <a className="nav-link dropdown-toggle" href="#" data-bs-toggle="dropdown" aria-expanded="false">Dropdown</a>
-                <ul className="dropdown-menu">
-                  <li><a className="dropdown-item" href="#">Action</a></li>
-                  <li><a className="dropdown-item" href="#">Another action</a></li>
-                  <li><a className="dropdown-item" href="#">Something else here</a></li>
-                </ul>
-              </li>
             </ul>
           </div>
         </div>
@@ -110,8 +102,8 @@ export default function Calculator() {
           </tr>
         </tbody>
       </table>
-      
-      <footer className="bg-dark" id="footer">
+
+      <footer className="bg-dark sticky bottom-0" id="footer">
         <div className="flex flex-row m-auto p-8">
           <p>Made by Ishaan2053</p>
 
