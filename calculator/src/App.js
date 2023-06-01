@@ -44,8 +44,8 @@ export default function Calculator() {
   };
 
   return (
-    <div className="">
-      <nav className="navbar navbar-expand-md navbar-dark bg-dark" aria-label="Fourth navbar example">
+    <div className="items-center">
+      <nav className="navbar navbar-expand-md navbar-dark bg-dark" aria-label="navbar">
         <div className="container-fluid">
           <a className="navbar-brand" href="github.com/Ishaan2053">Ishaan2053</a>
           <button className="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbar" aria-controls="navbar" aria-expanded="false" aria-label="Toggle navigation">
@@ -64,51 +64,44 @@ export default function Calculator() {
           </div>
         </div>
       </nav>
-      <table className="bg-black items-center justify-center">
+      <table className="calculator">
         <tbody>
           <tr>
             <td colSpan="4">
-              <input type="text" value={input} onChange={(e) => setInput(e.target.value)} />
+              <input type="text" className="text-white user-select-none" id="display-box" value={input} onChange={(e) => setInput(e.target.value)} />
             </td>
           </tr>
           <tr>
-            <td><button onClick={() => handleButtonClick("1")}>1</button></td>
-            <td><button onClick={() => handleButtonClick("2")}>2</button></td>
-            <td><button onClick={() => handleButtonClick("3")}>3</button></td>
-            <td><button onClick={() => handleButtonClick("+")}>+</button></td>
+            <td><button className="btn btn-primary" onClick={() => handleButtonClick("1")}>1</button></td>
+            <td><button className="btn btn-primary" onClick={() => handleButtonClick("2")}>2</button></td>
+            <td><button className="btn btn-primary" onClick={() => handleButtonClick("3")}>3</button></td>
+            <td><button className="btn btn-primary" onClick={() => handleButtonClick("+")}>+</button></td>
           </tr>
           <tr>
-            <td><button onClick={() => handleButtonClick("4")}>4</button></td>
-            <td><button onClick={() => handleButtonClick("5")}>5</button></td>
-            <td><button onClick={() => handleButtonClick("6")}>6</button></td>
-            <td><button onClick={() => handleButtonClick("-")}>-</button></td>
+            <td><button className="btn btn-primary" onClick={() => handleButtonClick("4")}>4</button></td>
+            <td><button className="btn btn-primary" onClick={() => handleButtonClick("5")}>5</button></td>
+            <td><button className="btn btn-primary" onClick={() => handleButtonClick("6")}>6</button></td>
+            <td><button className="btn btn-primary" onClick={() => handleButtonClick("-")}>-</button></td>
           </tr>
           <tr>
-            <td><button onClick={() => handleButtonClick("7")}>7</button></td>
-            <td><button onClick={() => handleButtonClick("8")}>8</button></td>
-            <td><button onClick={() => handleButtonClick("9")}>9</button></td>
-            <td><button onClick={() => handleButtonClick("*")}>*</button></td>
+            <td><button className="btn btn-primary" onClick={() => handleButtonClick("7")}>7</button></td>
+            <td><button className="btn btn-primary" onClick={() => handleButtonClick("8")}>8</button></td>
+            <td><button className="btn btn-primary" onClick={() => handleButtonClick("9")}>9</button></td>
+            <td><button className="btn btn-primary" onClick={() => handleButtonClick("*")}>*</button></td>
           </tr>
           <tr>
-            <td><button onClick={() => handleButtonClick(".")}>.</button></td>
-            <td><button onClick={() => handleButtonClick("0")}>0</button></td>
-            <td><button onClick={() => handleButtonClick("=")}>=</button></td>
-            <td><button onClick={() => handleButtonClick("/")}>/</button></td>
+            <td><button className="btn btn-primary" onClick={() => handleButtonClick(".")}>.</button></td>
+            <td><button className="btn btn-primary" onClick={() => handleButtonClick("0")}>0</button></td>
+            <td><button className="btn btn-success" onClick={() => handleButtonClick("=")}>=</button></td>
+            <td><button className="btn btn-primary" onClick={() => handleButtonClick("/")}>/</button></td>
           </tr>
           <tr>
-            <td><button onClick={() => handleButtonClick("C")}>C</button></td>
-            <td><button onClick={() => handleButtonClick("←")}>←</button></td>
+            <td><button className="btn btn-danger" onClick={() => handleButtonClick("C")}>C</button></td>
+            <td><button className="btn btn-primary" onClick={() => handleButtonClick("←")}>←</button></td>
             <td colSpan="2">{result}</td>
           </tr>
         </tbody>
       </table>
-
-      <footer className="bg-dark sticky bottom-0" id="footer">
-        <div className="flex flex-row m-auto p-8">
-          <p>Made by Ishaan2053</p>
-
-        </div>
-      </footer>
     </div>
   );
 }
