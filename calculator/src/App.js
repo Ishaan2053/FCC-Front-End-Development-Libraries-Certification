@@ -1,107 +1,142 @@
-import { useState, useEffect } from "react";
+import React, { useState, useEffect } from 'react';
+import './App.css';
 
-export default function Calculator() {
-  const [input, setInput] = useState("");
-  const [result, setResult] = useState("0");
+const Calculator = () => {
+  const [result, setResult] = useState('0');
 
   useEffect(() => {
-    document.addEventListener("keydown", handleKeyPress);
+    document.addEventListener('keydown', handleKeyDown);
     return () => {
-      document.removeEventListener("keydown", handleKeyPress);
-    }
-  });
+      document.removeEventListener('keydown', handleKeyDown);
+    };
+  }, []);
 
-  const handleButtonClick = (value) => {
-    if (value === "C") {
-      setInput("");
-      setResult("0");
-    } else if (value === "←") {
-      setInput(input.slice(0, -1));
-    } else if (value === "=") {
-      try {
-        setResult(eval(input) + "");
-      } catch (error) {
-        setResult("Error");
-      }
+  const handleKeyDown = (e) => {
+    const key = e.key;
+    if (key === 'Enter') {
+      calculate();
+    } else if (key === 'Escape') {
+      clear();
     } else {
-      setInput(input + value);
+      const button = document.querySelector(`button[name="${key}"]`);
+      if (button) {
+        button.click();
+      }
     }
   };
 
-  const handleKeyPress = (event) => {
-    const value = event.key;
-    if (/\d|-|\+|\*|\/|\.|Enter|Backspace|Escape/.test(value)) {
-      if (value === "Enter") {
-        handleButtonClick("=");
-      } else if (value === "Backspace") {
-        handleButtonClick("←");
-      } else if (value === "Escape") {
-        handleButtonClick("C");
-      } else {
-        handleButtonClick(value);
+  const handleClick = (e) => {
+    const value = e.target.name;
+
+    if (value === '.') {
+      if (!result.includes('.')) {
+        setResult(result + value);
       }
+    } else if (value === '=') {
+      calculate();
+    } else if (value === 'C') {
+      clear();
+    } else if (result === 'Error') {
+      setResult(value);
+    } else {
+      setResult((prevResult) => {
+        const lastChar = prevResult.slice(-1);
+        if (
+          isOperator(lastChar) &&
+          isOperator(value) &&
+          value !== '-' &&
+          lastChar !== '-'
+        ) {
+          const updatedResult = prevResult.slice(0, -1) + value;
+          return applyNegativeSign(updatedResult);
+        }
+        return prevResult === '0' ? value : applyNegativeSign(prevResult + value);
+      });
     }
+  };
+
+  const applyNegativeSign = (value) => {
+    if (value.startsWith('-') && !isOperator(value[1])) {
+      return `-${value.slice(1)}`;
+    }
+    return value;
+  };
+
+  const calculate = () => {
+    try {
+      setResult(eval(result).toString());
+    } catch (error) {
+      setResult('Error');
+    }
+  };
+
+  const clear = () => {
+    setResult('0');
+  };
+
+  const isOperator = (value) => {
+    return value === '+' || value === '-' || value === '*' || value === '/';
   };
 
   return (
-    <div className="items-center">
-      <nav className="navbar navbar-expand-md navbar-dark bg-dark" aria-label="navbar">
-        <div className="container-fluid">
-          <a className="navbar-brand" href="github.com/Ishaan2053">Ishaan2053</a>
-          <button className="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbar" aria-controls="navbar" aria-expanded="false" aria-label="Toggle navigation">
-            <span className="navbar-toggler-icon"></span>
-          </button>
+    <div className="calculator">
+      <input type="text" value={result} readOnly id="display" />
 
-          <div className="collapse navbar-collapse" id="navbar">
-            <ul className="navbar-nav me-auto mb-2 mb-md-0">
-              <li className="nav-item">
-                <a className="nav-link active" aria-current="page" href="#">Home</a>
-              </li>
-              <li className="nav-item">
-                <a className="nav-link" href="#">Link</a>
-              </li>
-            </ul>
-          </div>
-        </div>
-      </nav>
-      <table className="calculator">
-        <tbody>
-          <tr>
-            <td colSpan="4">
-              <input type="text" className="text-white user-select-none" id="display-box" value={input} onChange={(e) => setInput(e.target.value)} />
-            </td>
-          </tr>
-          <tr>
-            <td><button className="btn btn-primary" onClick={() => handleButtonClick("1")}>1</button></td>
-            <td><button className="btn btn-primary" onClick={() => handleButtonClick("2")}>2</button></td>
-            <td><button className="btn btn-primary" onClick={() => handleButtonClick("3")}>3</button></td>
-            <td><button className="btn btn-primary" onClick={() => handleButtonClick("+")}>+</button></td>
-          </tr>
-          <tr>
-            <td><button className="btn btn-primary" onClick={() => handleButtonClick("4")}>4</button></td>
-            <td><button className="btn btn-primary" onClick={() => handleButtonClick("5")}>5</button></td>
-            <td><button className="btn btn-primary" onClick={() => handleButtonClick("6")}>6</button></td>
-            <td><button className="btn btn-primary" onClick={() => handleButtonClick("-")}>-</button></td>
-          </tr>
-          <tr>
-            <td><button className="btn btn-primary" onClick={() => handleButtonClick("7")}>7</button></td>
-            <td><button className="btn btn-primary" onClick={() => handleButtonClick("8")}>8</button></td>
-            <td><button className="btn btn-primary" onClick={() => handleButtonClick("9")}>9</button></td>
-            <td><button className="btn btn-primary" onClick={() => handleButtonClick("*")}>*</button></td>
-          </tr>
-          <tr>
-            <td><button className="btn btn-primary" onClick={() => handleButtonClick(".")}>.</button></td>
-            <td><button className="btn btn-primary" onClick={() => handleButtonClick("0")}>0</button></td>
-            <td><button className="btn btn-success" onClick={() => handleButtonClick("=")}>=</button></td>
-            <td><button className="btn btn-primary" onClick={() => handleButtonClick("/")}>/</button></td>
-          </tr>
-          <tr>
-            <td><button className="btn btn-danger" onClick={() => handleButtonClick("C")}>C</button></td>
-            <td><button className="btn btn-primary" onClick={() => handleButtonClick("←")}>←</button></td>
-            <td colSpan="2">{result}</td>
-          </tr>
-        </tbody>
-      </table>
+      <div className="keypad">
+        <button onClick={clear} className="highlight" id="clear">
+          Clear
+        </button>
+        <button onClick={handleClick} name="7" id="seven">
+          7
+        </button>
+        <button onClick={handleClick} name="8" id="eight">
+          8
+        </button>
+        <button onClick={handleClick} name="9" id="nine">
+          9
+        </button>
+        <button onClick={handleClick} name="/" id="divide">
+          /
+        </button>
+        <button onClick={handleClick} name="4" id="four">
+          4
+        </button>
+        <button onClick={handleClick} name="5" id="five">
+          5
+        </button>
+        <button onClick={handleClick} name="6" id="six">
+          6
+        </button>
+        <button onClick={handleClick} name="*" id="multiply">
+          *
+        </button>
+        <button onClick={handleClick} name="1" id="one">
+          1
+        </button>
+        <button onClick={handleClick} name="2" id="two">
+          2
+        </button>
+        <button onClick={handleClick} name="3" id="three">
+          3
+        </button>
+        <button onClick={handleClick} name="+" id="add">
+          +
+        </button>
+        <button onClick={handleClick} name="0" id="zero">
+          0
+        </button>
+        <button onClick={handleClick} name="." id="decimal">
+          .
+        </button>
+        <button onClick={calculate} className="highlight" id="equals">
+          =
+        </button>
+        <button onClick={handleClick} name="-" id="subtract">
+          -
+        </button>
+      </div>
     </div>
   );
-}
+};
+
+export default Calculator;
