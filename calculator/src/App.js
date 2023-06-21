@@ -29,9 +29,14 @@ const Calculator = () => {
     const value = e.target.name;
 
     if (value === '.') {
-      if (!result.includes('.')) {
-        setResult(result + value);
-      }
+      // Allow decimal point only if it's a valid input
+      setResult((prevResult) => {
+        const lastNum = getLastNumber(prevResult);
+        if (!lastNum.includes('.')) {
+          return prevResult + value;
+        }
+        return prevResult;
+      });
     } else if (value === '=') {
       calculate();
     } else if (value === 'C') {
@@ -47,24 +52,20 @@ const Calculator = () => {
           value !== '-' &&
           lastChar !== '-'
         ) {
-          const updatedResult = prevResult.slice(0, -1) + value;
-          return applyNegativeSign(updatedResult);
+          return prevResult.slice(0, -1) + value;
+        } else if (isOperator(value) && value !== '-') {
+          return prevResult + value;
         }
-        return prevResult === '0' ? value : applyNegativeSign(prevResult + value);
+        return prevResult === '0' ? value : prevResult + value;
       });
     }
   };
 
-  const applyNegativeSign = (value) => {
-    if (value.startsWith('-') && !isOperator(value[1])) {
-      return `-${value.slice(1)}`;
-    }
-    return value;
-  };
-
   const calculate = () => {
     try {
-      setResult(eval(result).toString());
+      let processedResult = result.replace(/([-+/*])\1+/g, '$1'); // Remove consecutive operators
+      processedResult = processedResult.replace('--', '+'); // Convert double negative to positive
+      setResult(eval(processedResult).toString());
     } catch (error) {
       setResult('Error');
     }
@@ -78,6 +79,12 @@ const Calculator = () => {
     return value === '+' || value === '-' || value === '*' || value === '/';
   };
 
+  const getLastNumber = (str) => {
+    // Extract the last number from the string
+    const matches = str.match(/(-?\d+(\.\d+)?)[^\d]*$/);
+    return matches ? matches[1] : '';
+  };
+  
   return (
     <div className="calculator">
       <input type="text" value={result} readOnly id="display" />
