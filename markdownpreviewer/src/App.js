@@ -1,50 +1,41 @@
-import './App.css';
-import React, { useState, useEffect } from "react";
-import marked from "marked";
+import './App.css'
+import React, { useState } from 'react';
+import { marked } from 'marked';
 
-const defaultMarkdown = `# Heading 1
-## Heading 2
-[Link](https://example.com)
-\`inline code\`
-
+const initialMarkdown = `# Heading
+## Subheading
+[Link](https://www.example.com)
+\`Inline code\`
 \`\`\`
-// Code block
-function helloWorld() {
-  console.log("Hello, World!");
-}
+Code block
 \`\`\`
-
-- List item 1
-- List item 2
-
+- List item
 > Blockquote
+![Image](https://www.example.com/image.jpg)
+**Bolded text**`;
 
-![Image](https://example.com/image.jpg)
-
-**Bolded Text**`;
-
-const App = () => {
-  const [markdown, setMarkdown] = useState(defaultMarkdown);
-
-  useEffect(() => {
-    document.getElementById("preview").innerHTML = marked(markdown);
-  }, [markdown]);
+function App() {
+  const [markdown, setMarkdown] = useState(initialMarkdown);
 
   const handleChange = (event) => {
     setMarkdown(event.target.value);
   };
 
+  const renderer = new marked.Renderer();
+  marked.setOptions({
+    renderer,
+    breaks: true,
+  });
+
   return (
-    <div>
-      <textarea
-        id="editor"
-        value={markdown}
-        onChange={handleChange}
-        rows={10}
-      ></textarea>
-      <div id="preview"></div>
+    <div className="App">
+      <textarea id="editor" value={markdown} onChange={handleChange} />
+      <div
+        id="preview"
+        dangerouslySetInnerHTML={{ __html: marked(markdown) }}
+      />
     </div>
   );
-};
+}
 
 export default App;
