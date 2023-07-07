@@ -2,16 +2,17 @@ import './App.css'
 import React, { useState } from 'react';
 import { marked } from 'marked';
 
-const initialMarkdown = `# Heading
-## Subheading
-[Link](https://www.example.com)
+const initialMarkdown = `# This is a Heading
+## This is a Subheading
+[This is a Link](https://www.example.com)
+
 \`Inline code\`
 \`\`\`
 Code block
 \`\`\`
 - List item
 > Blockquote
-![Image](https://www.example.com/image.jpg)
+![Image](https://th.bing.com/th?id=OIP.hk8jNe9eIlbwQiNmG6n8TwHaEK&w=333&h=187&c=8&rs=1&qlt=90&o=6&pid=3.1&rm=2)
 **Bolded text**`;
 
 function App() {
@@ -29,6 +30,9 @@ function App() {
 
   return (
     <div className="App">
+        <div id="footer">
+        <sub>Created by Ishaan2053. Uses marked library.</sub>
+      </div>
       <textarea id="editor" value={markdown} onChange={handleChange} />
       <div
         id="preview"
