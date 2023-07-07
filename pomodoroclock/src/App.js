@@ -86,7 +86,7 @@ const PomodoroTimer = () => {
   };
 
   return (
-    <div>
+    <div id="timer-container" className='flex flex-col items-center h-screen justify-center max-w-full p-auto m-auto'>
       <div id="break-label">
         Break Length: {breakLength}
       </div>
@@ -114,14 +114,14 @@ const PomodoroTimer = () => {
         {formatTime(timeLeft)}
       </div>
 
-      <button id="start_stop" onClick={handleStartStop}>
+      <button className='bg-rose-200' id="start_stop" onClick={handleStartStop}>
         Start/Stop
       </button>
-      <button id="reset" onClick={handleReset}>
+      <button className='bg-rose-300 transition hover:animate-bounce' id="reset" onClick={handleReset}>
         Reset
       </button>
 
-      <audio id="beep" ref={audioRef} src="path/to/audio/file.mp3" />
+      <audio id="beep" ref={audioRef} src="../music.mp3" />
     </div>
   );
 };
