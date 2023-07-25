@@ -4,7 +4,7 @@ import { marked } from 'marked';
 
 const initialMarkdown = `# This is a Heading
 ## This is a Subheading
-[This is a Link](https://www.example.com)
+[This is a Link You Can Click](https://www.example.com)
 
 \`Inline code\`
 \`\`\`
@@ -13,7 +13,7 @@ Code block
 - List item
 > Blockquote
 ![Image](https://th.bing.com/th?id=OIP.hk8jNe9eIlbwQiNmG6n8TwHaEK&w=333&h=187&c=8&rs=1&qlt=90&o=6&pid=3.1&rm=2)
-**Bolded text**`;
+**A happy Dog (in bold)**`;
 
 function App() {
   const [markdown, setMarkdown] = useState(initialMarkdown);
@@ -30,9 +30,8 @@ function App() {
 
   return (
     <div className="App">
-        <div id="footer">
-        <sub>Created by Ishaan2053. Uses marked library.</sub>
-      </div>
+       <h1 className='Heading'>Markdown Previewer</h1>
+       <h3 className='comment'>Made by Ishaan2053</h3>
       <textarea id="editor" value={markdown} onChange={handleChange} />
       <div
         id="preview"
